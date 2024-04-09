@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,7 +27,7 @@
     </div>
 </div>
 </body>
-<!-- <script>
+ <script>
     // Função para incrementar o contador e armazenar o valor
     function incrementarContador() {
         // Verifica se há um valor armazenado no localStorage
@@ -49,56 +49,44 @@
     if (localStorage.getItem('contador')) {
         document.getElementById('contador').textContent = localStorage.getItem('contador');
     }
-</script> -->
-
-<!-- 
-<script>
-    // Função para incrementar o contador
-    function incrementarContador() {
-      // Verifica se a variável de ambiente está definida
-      if (process.env.COUNTER_VALUE) {
-        // Converte o valor da variável de ambiente para número e incrementa
-        var contadorAtual = parseInt(process.env.COUNTER_VALUE);
-        contadorAtual++;
-        // Atualiza a variável de ambiente com o novo valor
-        fetch('/api/atualizar-contador', {
-          method: 'POST',
-          body: JSON.stringify({ contador: contadorAtual })
-        })
-        .then(response => {
-          if (response.ok) {
-            // Se a atualização for bem-sucedida, atualiza o contador na página
-            document.getElementById('contador').textContent = contadorAtual;
-          } else {
-            console.error('Erro ao atualizar o contador');
-          }
-        })
-        .catch(error => {
-          console.error('Erro ao atualizar o contador:', error);
-        });
-      } else {
-        console.error('Variável de ambiente do contador não definida');
-      }
-    }
-    </script> -->
-    <script src="api/atualizar-contador.js">
-         function incrementarContador() {
-        fetch('/api/atualizar-contador', { method: 'POST' })
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error('Erro ao atualizar o contador');
-            }
-          })
-          .then(data => {
-            document.getElementById('contador').textContent = data.contador;
-          })
-          .catch(error => {
-            console.error('Erro ao atualizar o contador:', error);
-          });
-      }
-    </script>
-   
+</script> 
       
+</html> -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contador</title>
+</head>
+<body>
+
+<h1>Contador</h1>
+<p>Clique no botão para incrementar o contador:</p>
+
+<button onclick="incrementarContador()">Incrementar</button>
+<p>O contador está em: <span id="contador">0</span></p>
+
+<script>
+// Função para fazer a requisição para atualizar o contador
+function incrementarContador() {
+  fetch('/api/atualizar-contador', { method: 'POST' })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Erro ao atualizar o contador');
+      }
+    })
+    .then(data => {
+      document.getElementById('contador').textContent = data.contador;
+    })
+    .catch(error => {
+      console.error('Erro ao atualizar o contador:', error);
+    });
+}
+</script>
+
+</body>
 </html>
