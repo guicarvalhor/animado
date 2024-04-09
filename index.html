@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="atualizar-contador">
 </head>
 
 <body>
@@ -15,10 +16,13 @@
     </div>
     <div class="contador">    
         <h1>Estás animado?</h1>
+
         <p>Clique no botão para aumentar a animação:</p>
         <button onclick="incrementarContador()">Estou animado!</button>
+
         <p>O índice de animação está em:</p> 
         <span id="contador">0</span>
+
         <h1> Estamos a 0 dias desanimados</h1>
     </div>
 </div>
@@ -47,7 +51,7 @@
     }
 </script> -->
 
-
+<!-- 
 <script>
     // Função para incrementar o contador
     function incrementarContador() {
@@ -76,5 +80,25 @@
         console.error('Variável de ambiente do contador não definida');
       }
     }
+    </script> -->
+    <script src="api/atualizar-contador.js">
+         function incrementarContador() {
+        fetch('/api/atualizar-contador', { method: 'POST' })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Erro ao atualizar o contador');
+            }
+          })
+          .then(data => {
+            document.getElementById('contador').textContent = data.contador;
+          })
+          .catch(error => {
+            console.error('Erro ao atualizar o contador:', error);
+          });
+      }
     </script>
+   
+      
 </html>
