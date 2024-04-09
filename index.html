@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-   
-<h1>Contador</h1>
-<p>Clique no botão para incrementar o contador:</p>
 
-<button onclick="incrementarContador()">Incrementar</button>
-<p>O contador está em: <span id="contador">0</span></p>
+<body>
+    <div class="contador">
+        <h1>Estás animado?</h1>
+        <p>Clique no botão para aumentar a animação:</p>
+
+        <button onclick="incrementarContador()">Estou animado!</button>
+        <p>O índice de animação está em:</p> 
+        <span id="contador">0</span>
+        <h1> Estamos a 0 dias desanimados</h1>
+    </div>
 </body>
 <script>
-// Função para incrementar o contador e armazenar o valor
-function incrementarContador() {
-  // Verifica se há um valor armazenado no localStorage
-  if (localStorage.getItem('contador')) {
-    // Se houver, incrementa o valor em 1
-    var contadorAtual = parseInt(localStorage.getItem('contador'));
-    contadorAtual++;
-    localStorage.setItem('contador', contadorAtual);
-  } else {
-    // Se não houver, define o valor inicial como 1
-    localStorage.setItem('contador', 1);
-  }
-  
-  // Atualiza o valor exibido na página
-  document.getElementById('contador').textContent = localStorage.getItem('contador');
-}
+    // Função para incrementar o contador e armazenar o valor
+    function incrementarContador() {
+        // Verifica se há um valor armazenado no localStorage
+        if (localStorage.getItem('contador')) {
+            // Se houver, incrementa o valor em 1
+            var contadorAtual = parseInt(localStorage.getItem('contador'));
+            contadorAtual++;
+            localStorage.setItem('contador', contadorAtual);
+        } else {
+            // Se não houver, define o valor inicial como 1
+            localStorage.setItem('contador', 1);
+        }
 
-// Verifica se há um valor armazenado e exibe na página
-if (localStorage.getItem('contador')) {
-  document.getElementById('contador').textContent = localStorage.getItem('contador');
-}
+        // Atualiza o valor exibido na página
+        document.getElementById('contador').textContent = localStorage.getItem('contador');
+    }
+
+    // Verifica se há um valor armazenado e exibe na página
+    if (localStorage.getItem('contador')) {
+        document.getElementById('contador').textContent = localStorage.getItem('contador');
+    }
 </script>
 
 </html>
