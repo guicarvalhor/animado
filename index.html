@@ -52,7 +52,6 @@
 </script> 
       
 </html> -->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -60,30 +59,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contador</title>
 </head>
-<body>
+<body onload="carregarContador()">
 
 <h1>Contador</h1>
-<p>Clique no botão para incrementar o contador:</p>
-
-<button onclick="incrementarContador()">Incrementar</button>
-<p>O contador está em: <span id="contador">0</span></p>
+<p>O contador está em: <span id="contador">Carregando...</span></p>
 
 <script>
-// Função para fazer a requisição para atualizar o contador
-function incrementarContador() {
-  fetch('/api/atualizar-contador', { method: 'POST' })
+// Função para fazer a requisição para obter o valor atual do contador
+function carregarContador() {
+  fetch('/api/obter-contador')
     .then(response => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error('Erro ao atualizar o contador');
+        throw new Error('Erro ao obter o contador');
       }
     })
     .then(data => {
       document.getElementById('contador').textContent = data.contador;
     })
     .catch(error => {
-      console.error('Erro ao atualizar o contador:', error);
+      console.error('Erro ao obter o contador:', error);
     });
 }
 </script>
