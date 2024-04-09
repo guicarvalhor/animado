@@ -23,7 +23,7 @@
     </div>
 </div>
 </body>
-<script>
+<!-- <script>
     // Função para incrementar o contador e armazenar o valor
     function incrementarContador() {
         // Verifica se há um valor armazenado no localStorage
@@ -45,6 +45,36 @@
     if (localStorage.getItem('contador')) {
         document.getElementById('contador').textContent = localStorage.getItem('contador');
     }
-</script>
+</script> -->
 
+
+<script>
+    // Função para incrementar o contador
+    function incrementarContador() {
+      // Verifica se a variável de ambiente está definida
+      if (process.env.COUNTER_VALUE) {
+        // Converte o valor da variável de ambiente para número e incrementa
+        var contadorAtual = parseInt(process.env.COUNTER_VALUE);
+        contadorAtual++;
+        // Atualiza a variável de ambiente com o novo valor
+        fetch('/api/atualizar-contador', {
+          method: 'POST',
+          body: JSON.stringify({ contador: contadorAtual })
+        })
+        .then(response => {
+          if (response.ok) {
+            // Se a atualização for bem-sucedida, atualiza o contador na página
+            document.getElementById('contador').textContent = contadorAtual;
+          } else {
+            console.error('Erro ao atualizar o contador');
+          }
+        })
+        .catch(error => {
+          console.error('Erro ao atualizar o contador:', error);
+        });
+      } else {
+        console.error('Variável de ambiente do contador não definida');
+      }
+    }
+    </script>
 </html>
